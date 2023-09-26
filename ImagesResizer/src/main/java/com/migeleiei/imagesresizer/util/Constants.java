@@ -19,7 +19,7 @@ public class Constants {
     public static final String TITLE_TYPE_ERROR = "File not Support";
     public static final String CONTENT_ZIP_DONT_HAVE_IMAGE = "Zip File don't have any file Image";
 
-    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg");
+    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg","JPG");
     public static final List<Character> LIST_HIDDEN_FILE = Arrays.asList('.', '_');
 
 }
