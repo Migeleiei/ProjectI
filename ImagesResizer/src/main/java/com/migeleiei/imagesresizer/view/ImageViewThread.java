@@ -3,6 +3,7 @@ package com.migeleiei.imagesresizer.view;
 import com.migeleiei.imagesresizer.model.ImageModel;
 import com.migeleiei.imagesresizer.util.UtilImage;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -62,6 +63,9 @@ public class ImageViewThread implements Callable<StackPane> {
     }
 
 
+    DoubleProperty widthProperty = new SimpleDoubleProperty();
+    DoubleProperty heightProperty = new SimpleDoubleProperty();
+
     private StackPane imageViewBufferedImage(ImageModel imgModel, IntegerProperty intColumn) {
         StackPane imageStack = new StackPane();
 
@@ -74,20 +78,21 @@ public class ImageViewThread implements Callable<StackPane> {
 
 
         imageView.setPreserveRatio(true);
+
+
         imageView.fitWidthProperty().bind(newLeftPane.widthProperty().divide(intColumn).multiply(0.95));
         imageView.fitHeightProperty().bind(newLeftPane.heightProperty());
 
 
-        Text textWaterMark = new Text();
-//        imageStack.getChildren().add(imageView);
-//        imageStack.getChildren().add(textWaterMark);
 
-//        addImageClickListener(imageView, imgModel);
+
+        Text textWaterMark = new Text();
 
 
         imgModel.getModelProperty().addListener((ob, o, n) -> {
 
             setTextProperties(textWaterMark, imageView, imgModel);
+
         });
 
         mainGridImg.widthProperty().addListener((ob, o, n) -> {
@@ -133,7 +138,6 @@ public class ImageViewThread implements Callable<StackPane> {
         textWatermark.setFont(Font.font(imageModel.textWaterMarkFontProperty().getValue(), FontWeight.BLACK, FontPosture.REGULAR, textPx));
 
 
-        double textWidth = textWatermark.getLayoutBounds().getWidth();
         //show text
         textWatermark.setText(imageModel.textWaterMarkProperty().getValue());
 
@@ -141,48 +145,7 @@ public class ImageViewThread implements Callable<StackPane> {
     }
 
 
-    private void addImageClickListener(ImageView imageView, ImageModel imageModel) {
-        imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-                File file = new File(imageModel.getPathImage());
-                String fileName = file.getName();
-
-
-//                SnapshotParameters sp = new SnapshotParameters();
-//                WritableImage image = imgStack.snapshot(sp, null);
-
-                BufferedImage image = UtilImage.convertToBufferedImage(imageModel);
-                Image img = UtilImage.convertToFxImage(image);
-
-
-                Pane root = new Pane();
-                Stage stage = new Stage();
-                stage.setTitle(fileName);
-
-                ImageView imageV = new ImageView(img);
-                imageV.setPreserveRatio(true);
-                imageV.fitWidthProperty().bind(root.widthProperty());
-
-                root.getChildren().add(imageV);
-
-
-
-                Scene scene = new Scene(root, image.getWidth(), image.getHeight());
-                stage.setScene(scene);
-                stage.show();
-
-
-            }
-        });
-    }
-
-
     private void addClickListener(Rectangle rectangle, ImageModel imageModel) {
-
-        DoubleProperty widthProperty = new SimpleDoubleProperty();
-
         rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -201,12 +164,6 @@ public class ImageViewThread implements Callable<StackPane> {
                 Stage stage = new Stage();
                 stage.setTitle(fileName);
 
-//                ImageView imageV = new ImageView(img);
-//                imageV.setPreserveRatio(true);
-//                imageV.fitWidthProperty().bind(root.widthProperty());
-
-//                root.getChildren().add(imageV);
-
 
                 /////
                 Rectangle rectangle = new Rectangle();
@@ -218,7 +175,6 @@ public class ImageViewThread implements Callable<StackPane> {
                 rectangle.yProperty().bind(root.heightProperty().multiply(0.1).divide(2));
 
 
-
                 rectangle.setArcWidth(50);
                 rectangle.setArcHeight(50);
 
@@ -228,10 +184,6 @@ public class ImageViewThread implements Callable<StackPane> {
 
 
                 root.getChildren().add(rectangle);
-
-                //////
-
-
                 Scene scene = new Scene(root, image.getWidth(), image.getHeight());
 
                 stage.setScene(scene);

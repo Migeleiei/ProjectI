@@ -2,20 +2,21 @@ package com.migeleiei.imagesresizer.view;
 
 import com.migeleiei.imagesresizer.Launcher;
 import com.migeleiei.imagesresizer.model.ImageModel;
+import com.migeleiei.imagesresizer.util.ChooseType;
 import com.migeleiei.imagesresizer.util.Constants;
-import com.migeleiei.imagesresizer.util.UtilImage;
+import com.migeleiei.imagesresizer.util.SceneView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,9 +34,14 @@ import java.util.zip.ZipInputStream;
 
 public class DropScene {
     ObservableList<ImageModel> listImageModel = FXCollections.observableArrayList();
+    private final ChooseType chooseType;
+
+    public DropScene(ChooseType chooseType) {
+        this.chooseType = chooseType;
+    }
 
     public Scene dropScene() throws URISyntaxException {
-        Scene scene = new Scene(dropPane(),400,400);
+        Scene scene = new Scene(dropPane(), 400, 400);
         return scene;
     }
 
@@ -57,7 +63,6 @@ public class DropScene {
 
         Button openBtn = new Button("Choose Files");
         vBox.getChildren().add(image);
-//        vBox.getChildren().add(openBtn);
         vBox.setSpacing(10);
 
         FileChooser fileChooser = new FileChooser();
@@ -70,24 +75,27 @@ public class DropScene {
                 listFile.forEach(f -> {
                     ImageModel imageModel = null;
                     try {
+                        BufferedImage bf = ImageIO.read(new File(f.getPath()));
                         imageModel = new ImageModel(
                                 f.getPath(),
                                 Constants.DEFAULT_TEXT_COLOR,
                                 Constants.DEFAULT_TEXT_SIZE,
                                 Constants.DEFAULT_TEXT_FONT,
                                 Constants.DEFAULT_TEXT_OPACITY,
-                                ImageIO.read(new File(f.getPath())),
-                                f.getName()
+                                bf,
+                                f.getName(),
+                                Constants.IS_KEEP_RATIO,
+                                bf.getHeight(),
+                                bf.getWidth()
                         );
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
 
                     listImageModel.add(imageModel);
-//                    pathListImage.add(f.getPath());
+
                 });
-                //            paneController.setPaneDropProperty(true);
-//                paneController.setImageModelList(FXCollections.observableList(listImageModel));
+
             }
 
 
@@ -109,6 +117,7 @@ public class DropScene {
                         boolean isZip = readZipFile(file);
 
                         isError = !isZip;
+
                     } else {
 
                         filePath = file.getAbsolutePath();
@@ -117,34 +126,54 @@ public class DropScene {
                         if (Constants.LIST_FILE_IMAGE.contains(fileType)) {
                             ImageModel imageModel = null;
                             try {
+                                BufferedImage bf = ImageIO.read(new File(filePath));
                                 imageModel = new ImageModel(
                                         filePath,
                                         Constants.DEFAULT_TEXT_COLOR,
                                         Constants.DEFAULT_TEXT_SIZE,
                                         Constants.DEFAULT_TEXT_FONT,
                                         Constants.DEFAULT_TEXT_OPACITY,
-                                        ImageIO.read(new File(filePath)),
-                                        file.getName()
+                                        bf,
+                                        file.getName(),
+                                        Constants.IS_KEEP_RATIO,
+                                        bf.getHeight(),
+                                        bf.getWidth()
+
                                 );
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
                             listImageModel.add(imageModel);
-//                            pathListImage.add(filePath);
+
                             isError = false;
                         } else {
                             isError = true;
-                            showErrorTypeDialog();
+                            showErrorTypeDialog("");
                         }
-
 
                     }
                 }
 
                 e.setDropCompleted(success);
                 if (!isError) {
-//                    paneController.setPaneDropProperty(true);
-//                    paneController.setImageModelList(FXCollections.observableList(listImageModel));
+                    MainScene mainScene = new MainScene(this.chooseType, listImageModel);
+                    Stage stage1 = new Stage();
+
+                    Scene scene = null;
+                    try {
+                        scene = mainScene.mainScene();
+                    } catch (URISyntaxException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    if(this.chooseType== ChooseType.RESIZE){
+                        stage1.setTitle(Constants.TITLE_RESIZE_SCENE);
+                    }else if(this.chooseType == ChooseType.WATERMARK){
+                        stage1.setTitle(Constants.TITLE_WATERMARK_SCENE);
+                    }
+                    stage1.setScene(scene);
+                    stage1.show();
+
+
                 }
 
                 e.consume();
@@ -164,13 +193,18 @@ public class DropScene {
         hBox.getChildren().add(vBox);
         return hBox;
     }
+
     private String getFileExtension(String fullFileName) {
         String fileFullName = new File(fullFileName).getName();
         int lastDot = fileFullName.lastIndexOf('.');
         return (lastDot == -1) ? "" : fileFullName.substring(lastDot + 1);
     }
+
     private boolean readZipFile(File file) {
         ZipFile zipFile = null;
+        ZipInputStream zis;
+        BufferedInputStream bis;
+        FileInputStream fis;
         try {
             zipFile = new ZipFile(file.getAbsolutePath());
         } catch (IOException ex) {
@@ -178,48 +212,75 @@ public class DropScene {
         }
 
         try {
-            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            ZipInputStream zis = new ZipInputStream(bis);
+            fis = new FileInputStream(file.getAbsolutePath());
+            bis = new BufferedInputStream(fis);
+            zis = new ZipInputStream(bis);
 
             ZipEntry zipEntry;
+
             while ((zipEntry = zis.getNextEntry()) != null) {
+
                 InputStream inputStream = zipFile.getInputStream(zipEntry);
                 String extension = getFileExtension(zipEntry.getName());
 
-                if (Constants.LIST_FILE_IMAGE.contains(extension)) {
-                    BufferedImage bf = ImageIO.read(inputStream);
+                String hiddenFile = zipEntry.getName();
+                char symbol = hiddenFile.charAt(0);
 
-                    Stage stage1 = new Stage();
+                if (!Constants.LIST_HIDDEN_FILE.contains(symbol)) {
+                    if (Constants.LIST_FILE_IMAGE.contains(extension)) {
 
-                    Pane pane = new Pane();
-                    Scene scene = new Scene(pane);
-                    Image img = UtilImage.convertToFxImage(bf);
-                    ImageView imageView = new ImageView(img);
-                    pane.getChildren().add(imageView);
-                    stage1.setScene(scene);
-                    stage1.show();
 
-                } else {
-                    showErrorTypeDialog();
+                        BufferedImage bf = ImageIO.read(inputStream);
 
-                    return false;
+
+                        ImageModel imageModel = new ImageModel(
+                                zipEntry.getName(),
+                                Constants.DEFAULT_TEXT_COLOR,
+                                Constants.DEFAULT_TEXT_SIZE,
+                                Constants.DEFAULT_TEXT_FONT,
+                                Constants.DEFAULT_TEXT_OPACITY,
+                                bf,
+                                zipEntry.getName(),
+                                Constants.IS_KEEP_RATIO,
+                                bf.getHeight(),
+                                bf.getWidth()
+                        );
+
+                        listImageModel.add(imageModel);
+
+
+                    }
+                    if (listImageModel.isEmpty()) {
+                        showErrorTypeDialog(Constants.CONTENT_ZIP_DONT_HAVE_IMAGE);
+                        return false;
+                    }
+                    //without check error because filter only image
+//                    else {
+//                        showErrorTypeDialog();
+//                        return false;
+//                    }
                 }
+
             }
 
+            zipFile.close();
+            fis.close();
+            bis.close();
+            zis.close();
 
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
+
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
 
-        return true;
 
+        return true;
     }
-    private void showErrorTypeDialog() {
+
+
+    private void showErrorTypeDialog(String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText(Constants.CONTENT_TYPE_ERROR);
+        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
         alert.setTitle(Constants.TITLE_TYPE_ERROR);
         alert.show();
     }

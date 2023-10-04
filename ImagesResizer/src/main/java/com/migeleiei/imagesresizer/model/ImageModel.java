@@ -21,13 +21,25 @@ public class ImageModel {
 
     private final DoubleProperty textRotate = new SimpleDoubleProperty();
 
+// for resize properties
+
+    private final BooleanProperty keepRatioProperty = new SimpleBooleanProperty();
+
+    private final IntegerProperty widthImageProperty = new SimpleIntegerProperty();
+    private final IntegerProperty heightImageProperty = new SimpleIntegerProperty();
+
+
+    private final IntegerProperty percentProperty = new SimpleIntegerProperty();
+
 
     public ImageModel() {
 
     }
 
     public ImageModel(String path, String color, int fontSize, String fontFamily, double opacity,
-                      BufferedImage bufferedImage,String imageName) {
+                      BufferedImage bufferedImage, String imageName, boolean keepRatio,
+                      int height,
+                      int width) {
         this.textWaterMark.set("");
         this.pathImage = path;
         this.textWaterMarkColor.set(color);
@@ -37,11 +49,15 @@ public class ImageModel {
         this.textRotateProperty().set(0.0);
         this.bufferedImageProperty.set(bufferedImage);
         this.imageName = imageName;
+        this.keepRatioProperty.set(keepRatio);
+        this.heightImageProperty.set(height);
+        this.widthImageProperty.set(width);
+        this.setPercentProperty(100);
 
 
     }
 
-    public String getImageName(){
+    public String getImageName() {
         return this.imageName;
     }
 
@@ -50,7 +66,7 @@ public class ImageModel {
         return this.bufferedImageProperty;
     }
 
-    public void setBufferedImageProperty(BufferedImage bufferedImage){
+    public void setBufferedImageProperty(BufferedImage bufferedImage) {
         this.bufferedImageProperty.set(bufferedImage);
     }
 
@@ -123,5 +139,43 @@ public class ImageModel {
     public void setTextWaterMarkProperty(String text) {
         this.textWaterMark.set(text);
     }
+
+
+    public BooleanProperty keepRatioPropertyProperty() {
+        return keepRatioProperty;
+    }
+
+    public void setKeepRatioProperty(boolean keepRatioProperty) {
+        this.keepRatioProperty.set(keepRatioProperty);
+    }
+
+
+    public IntegerProperty percentPropertyProperty() {
+        return percentProperty;
+    }
+
+    public void setPercentProperty(int percentProperty) {
+        this.percentProperty.set(percentProperty);
+    }
+
+
+
+    public IntegerProperty widthImagePropertyProperty() {
+        return widthImageProperty;
+    }
+
+    public void setWidthImageProperty(int widthImageProperty) {
+        this.widthImageProperty.set(widthImageProperty);
+    }
+
+
+    public IntegerProperty heightImagePropertyProperty() {
+        return heightImageProperty;
+    }
+
+    public void setHeightImageProperty(int heightImageProperty) {
+        this.heightImageProperty.set(heightImageProperty);
+    }
+
 
 }

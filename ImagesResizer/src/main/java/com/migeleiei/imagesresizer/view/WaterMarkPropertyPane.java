@@ -1,9 +1,9 @@
 package com.migeleiei.imagesresizer.view;
 
+import com.migeleiei.imagesresizer.controller.WaterMarkController;
 import com.migeleiei.imagesresizer.model.ImageModel;
+import com.migeleiei.imagesresizer.util.ChooseType;
 import com.migeleiei.imagesresizer.util.Constants;
-import com.migeleiei.imagesresizer.util.SaveImageThread;
-import com.migeleiei.imagesresizer.util.UtilImage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -11,13 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
-import java.io.File;
 
 public class WaterMarkPropertyPane extends VBox {
 
@@ -25,10 +20,12 @@ public class WaterMarkPropertyPane extends VBox {
     ObservableList<String> fontsList;
 
     ObservableList<ImageModel> listImageModel;
+    WaterMarkController watermarkController;
 
     public WaterMarkPropertyPane(ObservableList<ImageModel> listImageModel) {
 
         this.listImageModel = listImageModel;
+        watermarkController = new WaterMarkController(listImageModel, ChooseType.WATERMARK);
 
 
         // Font in OS
@@ -39,7 +36,7 @@ public class WaterMarkPropertyPane extends VBox {
         setAlignment(Pos.CENTER);
 
         Button saveButton = new Button("Save");
-        onClickSaveButton(saveButton);
+        watermarkController.onClickSaveButton(saveButton);
 
         getChildren().add(setTextProperty());
 
@@ -64,15 +61,10 @@ public class WaterMarkPropertyPane extends VBox {
         Text opacity = new Text("Opacity");
 
         TextField textField = new TextField();
-        TextField fontSizeTextField = new TextField();
 
 
         // ROW 1
 
-//        Spinner<Integer> spinner = new Spinner<Integer>();
-//        SpinnerValueFactory<Integer> spinnerValueFactory = //
-//                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 120, Constants.DEFAULT_TEXT_SIZE);
-//        spinner.setValueFactory(spinnerValueFactory);
 
         Slider sliderFontSize = new Slider();
         sliderFontSize.setMax(120);
@@ -122,161 +114,14 @@ public class WaterMarkPropertyPane extends VBox {
 
         /// Listener
 
-        addTextListener(textField);
-        addSliderFontSizeListener(sliderFontSize);
-//        addTextFontSizeListener(spinner);
-//        addTextSizeListener(fontSizeTextField);
-        addSelectFontListener(combo);
-        addSelectColorListener(colorPicker);
-        addTextOpacityListener(spinnerOpacity);
-        addSliderRotateListener(slider);
+        watermarkController.addTextListener(textField);
+        watermarkController.addSliderFontSizeListener(sliderFontSize);
+        watermarkController.addSelectFontListener(combo);
+        watermarkController.addSelectColorListener(colorPicker);
+        watermarkController.addTextOpacityListener(spinnerOpacity);
+        watermarkController.addSliderRotateListener(slider);
 
         return gridPane;
-    }
-
-    //listen event
-
-    private void onClickSaveButton(Button button) {
-
-        button.setOnAction(e -> {
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle(Constants.TITLE_SAVE_DIALOG);
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg","*.png"));
-
-            File fileDialog = fileChooser.showSaveDialog(stage);
-
-
-            String pathTo = fileDialog.getPath();
-
-            //Check has image
-            listImageModel.forEach(i -> {
-                //have 1 image save name input
-                if (listImageModel.size() == 1) {
-
-                    String fileName = fileDialog.getName();
-
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName);
-                    saveImageThread.start();
-
-                } else {
-                    String fileNameDialog = fileDialog.getName();
-                    String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileDialog.getName().length());
-                    //have > 1 save same original
-//                    File fileOrigi = new File(i.getPathImage());
-                    String fileName = i.getImageName();
-
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName);
-                    saveImageThread.start();
-
-
-                }
-
-
-            });
-
-
-        });
-    }
-
-    private void addTextListener(final TextField textField) {
-        textField.textProperty().addListener((ob, o, n) -> {
-            listImageModel.forEach(i -> {
-                i.setTextWaterMarkProperty(n);
-                i.setModelProperty(n);
-            });
-        });
-    }
-
-//    private void addTextFontSizeListener(Spinner<Integer> spinner) {
-//        spinner.valueProperty().addListener((ob, o, n) -> {
-//            listImageModel.forEach(i -> {
-//                i.setTextWaterMarkSize(n);
-//                i.setModelProperty(n);
-//            });
-//
-//        });
-//    }
-
-
-    private void addSliderFontSizeListener(Slider slider) {
-        slider.valueProperty().addListener((observable, oldValue, n) -> {
-            listImageModel.forEach(i -> {
-                i.setTextWaterMarkSize(n.intValue());
-                i.setModelProperty(n);
-
-            });
-        });
-    }
-    private void addTextOpacityListener(Spinner<Double> spinner) {
-        spinner.valueProperty().addListener((ob, o, n) -> {
-            listImageModel.forEach(i -> {
-                i.setTextOpacityProperty(n);
-                i.setModelProperty(n);
-            });
-        });
-    }
-
-    private void addSliderRotateListener(Slider slider) {
-        slider.valueProperty().addListener((observable, oldValue, n) -> {
-            listImageModel.forEach(i -> {
-                i.setRotate(n.doubleValue());
-                i.setModelProperty(n);
-
-            });
-        });
-    }
-
-    private void addTextSizeListener(final TextField textField) {
-        textField.textProperty().addListener((ob, o, n) -> {
-            listImageModel.forEach(i -> {
-                if (!n.isBlank() || !n.isEmpty())
-                    if (Integer.parseInt(n) < 1) {
-                        i.setTextWaterMarkSize(2);
-                        i.setModelProperty(2);
-                    } else {
-                        i.setTextWaterMarkSize(Integer.parseInt(n));
-                        i.setModelProperty(Integer.parseInt(n));
-                    }
-
-            });
-        });
-    }
-
-    private void addSelectFontListener(final ComboBox<String> combo) {
-        combo.setOnAction(e -> {
-            listImageModel.forEach(i -> {
-                i.setTextWaterMarkFont(combo.getValue());
-                i.setModelProperty(combo.getValue());
-            });
-
-        });
-    }
-
-    private void addSelectColorListener(final ColorPicker colorPicker) {
-        colorPicker.setOnAction(e -> {
-            Color c = colorPicker.getValue();
-
-            String hex = toRGBCode(c);
-            System.out.println("Hex color :" + hex);
-            System.out.println("Size : " + listImageModel.size());
-
-
-            listImageModel.forEach(i -> {
-                i.setTextWaterMarkColor(hex);
-                i.setModelProperty(hex);
-
-            });
-
-        });
-    }
-
-
-    public static String toRGBCode(Color color) {
-        return String.format("#%02X%02X%02X",
-                (int) (color.getRed() * 255),
-                (int) (color.getGreen() * 255),
-                (int) (color.getBlue() * 255));
     }
 
 

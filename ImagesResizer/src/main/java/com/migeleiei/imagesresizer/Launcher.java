@@ -1,34 +1,73 @@
 package com.migeleiei.imagesresizer;
 /**
- *
  * Author MigelEiEi or Seksan Jomchanasuk and .....
- *
- *
  */
 
+import com.migeleiei.imagesresizer.util.ChooseType;
 import com.migeleiei.imagesresizer.view.DropScene;
 import com.migeleiei.imagesresizer.view.MainScene;
 import com.migeleiei.imagesresizer.view.MenuScene;
 import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.net.URISyntaxException;
 
 public class Launcher extends Application {
 
 
+    ObjectProperty<ChooseType> chooseTypeObjectProperty = new SimpleObjectProperty<>();
+
     @Override
-    public void start(Stage stage) throws  URISyntaxException {
+    public void start(Stage stage) throws URISyntaxException {
 
 
-        MainScene mainScene = new MainScene();
-        DropScene dropScene = new DropScene();
-        MenuScene menuScene = new MenuScene();
-        Scene scene = mainScene.mainScene();
+        MenuScene menuScene = new MenuScene(chooseTypeObjectProperty);
+        Scene meScene = menuScene.menuScene();
 
+
+
+        // first time
         stage.setTitle("Project");
-        stage.setScene(mainScene.mainScene());
+        stage.setScene(meScene);
         stage.show();
+
+        chooseTypeObjectProperty.addListener((ob, o, n) -> {
+
+            switch (n) {
+                case RESIZE -> {
+                    stage.setTitle("Drop Your Images");
+                    DropScene dropScene = new DropScene(n);
+                    Scene dScene = null;
+                    try {
+                        dScene = dropScene.dropScene();
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    }
+                    stage.setScene(dScene);
+                    stage.show();
+                }
+                case WATERMARK -> {
+                    stage.setTitle("Project");
+                    DropScene dropScene = new DropScene(n);
+                    Scene dScene = null;
+                    try {
+                        dScene = dropScene.dropScene();
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    }
+                    stage.setScene(dScene);
+                    stage.show();
+                }
+
+            }
+
+
+        });
+
+
     }
 
     public static void main(String[] args) {
