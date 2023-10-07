@@ -39,6 +39,13 @@ public class MenuScene {
         main.setSpacing(60);
         main.setFillWidth(true);
         main.setAlignment(Pos.CENTER);
+        main.setStyle("-fx-background-color: #ffb6c1;");
+        //8fbc8f green
+        //b0e0e6 blue
+        //d8bfd8 light purple
+        //ffc87c yellow
+
+
 
         HBox menu = new HBox();
         menu.setSpacing(80);
@@ -54,6 +61,12 @@ public class MenuScene {
         resize.setFitHeight(150);
         resize.setPreserveRatio(true);
 
+        Text resizeText = new Text("Resize");
+        resizeText.setFont(new Font("Cambria", 20));
+        VBox resizeBox = new VBox();
+        resizeBox.setAlignment(Pos.CENTER);
+        resizeBox.getChildren().addAll(resize, resizeText);
+
         Image watermarkImg = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/Watermark.png")).toURI().toString());
         ImageView watermark = new ImageView(watermarkImg);
         AnchorPane.setRightAnchor(watermark, 60.0);
@@ -61,8 +74,15 @@ public class MenuScene {
         watermark.setFitHeight(150);
         watermark.setPreserveRatio(true);
 
-        menu.getChildren().add(resize);
-        menu.getChildren().add(watermark);
+        Text watermarkText = new Text("Watermark");
+        watermarkText.setFont(new Font("Cambria", 20));
+        VBox watermarkBox = new VBox();
+        watermarkBox.setAlignment(Pos.CENTER);
+        watermarkBox.getChildren().addAll(watermark, watermarkText);
+
+        menu.getChildren().addAll(resizeBox, watermarkBox);
+
+//
 
         ///
 //        addListen SceneController
@@ -72,14 +92,14 @@ public class MenuScene {
         Text title = new Text("Select Tool");
 
         // Effect
-        DropShadow ds = new DropShadow();
-        ds.setOffsetY(3.0f);
-        ds.setColor(Color.color(0.4, 0.4, 0.4));
-        ds.setSpread(0.1);
+//        DropShadow ds = new DropShadow();
+//        ds.setOffsetY(3.0f);
+//        ds.setColor(Color.color(0.4, 0.4, 0.4));
+//        ds.setSpread(0.1);
 
 
-        title.setFont(new Font("Chalkboard SE Light", 60));
-        title.setEffect(ds);
+        title.setFont(new Font("Cambria", 60));
+//        title.setEffect(ds);
 
 
         main.getChildren().add(title);
