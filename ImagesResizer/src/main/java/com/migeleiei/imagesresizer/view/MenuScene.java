@@ -29,7 +29,6 @@ public class MenuScene {
         return new Scene(menuPane(), 600, 400);
     }
 
-
     private Pane menuPane() throws URISyntaxException {
         Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),50);
         Image backgroundImage = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/1.png")).toURI().toString());
