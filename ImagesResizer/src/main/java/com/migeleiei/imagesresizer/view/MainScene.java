@@ -51,7 +51,7 @@ public class MainScene {
 
         leftPane.prefWidthProperty().bind(mainPain.widthProperty().divide(4 / 2));
         leftPane.prefHeightProperty().bind(mainPain.heightProperty());
-
+        //rightSide_of_functions
         rightPane.prefWidthProperty().bind(mainPain.widthProperty().divide(4 / 2));
         rightPane.prefHeightProperty().bind(mainPain.heightProperty());
 

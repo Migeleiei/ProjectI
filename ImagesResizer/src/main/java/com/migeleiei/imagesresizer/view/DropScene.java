@@ -64,41 +64,41 @@ public class DropScene {
         vBox.getChildren().add(image);
         vBox.setSpacing(10);
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Multiple Files");
-        Stage stage = new Stage();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"));
-        openBtn.setOnAction(e -> {
-            List<File> listFile = fileChooser.showOpenMultipleDialog(stage);
-            if (listFile != null) {
-                listFile.forEach(f -> {
-                    ImageModel imageModel = null;
-                    try {
-                        BufferedImage bf = ImageIO.read(new File(f.getPath()));
-                        imageModel = new ImageModel(
-                                f.getPath(),
-                                Constants.DEFAULT_TEXT_COLOR,
-                                Constants.DEFAULT_TEXT_SIZE,
-                                Constants.DEFAULT_TEXT_FONT,
-                                Constants.DEFAULT_TEXT_OPACITY,
-                                bf,
-                                f.getName(),
-                                Constants.IS_KEEP_RATIO,
-                                bf.getHeight(),
-                                bf.getWidth()
-                        );
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                    listImageModel.add(imageModel);
-
-                });
-
-            }
-
-
-        });
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Open Multiple Files");
+//        Stage stage = new Stage();
+//        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"));
+//        openBtn.setOnAction(e -> {
+//            List<File> listFile = fileChooser.showOpenMultipleDialog(stage);
+//            if (listFile != null) {
+//                listFile.forEach(f -> {
+//                    ImageModel imageModel = null;
+//                    try {
+//                        BufferedImage bf = ImageIO.read(new File(f.getPath()));
+//                        imageModel = new ImageModel(
+//                                f.getPath(),
+//                                Constants.DEFAULT_TEXT_COLOR,
+//                                Constants.DEFAULT_TEXT_SIZE,
+//                                Constants.DEFAULT_TEXT_FONT,
+//                                Constants.DEFAULT_TEXT_OPACITY,
+//                                bf,
+//                                f.getName(),
+//                                Constants.IS_KEEP_RATIO,
+//                                bf.getHeight(),
+//                                bf.getWidth()
+//                        );
+//                    } catch (IOException ex) {
+//                        throw new RuntimeException(ex);
+//                    }
+//
+//                    listImageModel.add(imageModel);
+//
+//                });
+//
+//            }
+//
+//
+//        });
 
 
         hBox.setOnDragDropped(e -> {

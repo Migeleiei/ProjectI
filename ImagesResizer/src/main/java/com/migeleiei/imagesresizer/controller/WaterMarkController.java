@@ -61,7 +61,7 @@ public class WaterMarkController {
 
             });
 
-            System.out.println("MigelEiEi Save images are success");
+            System.out.println("Save images are success");
             showSaveImageSuccess();
 
 
