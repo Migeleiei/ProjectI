@@ -6,11 +6,9 @@ import com.migeleiei.imagesresizer.model.ChooseType;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -33,13 +31,24 @@ public class MenuScene {
 
 
     private Pane menuPane() throws URISyntaxException {
+        Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),50);
+        Image backgroundImage = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/1.png")).toURI().toString());
+
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(600); // Set the width to match your scene size
+        backgroundImageView.setFitHeight(400);
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage backgroundImageObj = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+        Background background = new Background(backgroundImageObj);
 
 
         VBox main = new VBox();
         main.setSpacing(60);
         main.setFillWidth(true);
         main.setAlignment(Pos.CENTER);
-        main.setStyle("-fx-background-color: #ffb6c1;");
+//        main.setStyle("-fx-background-color: #ffb6c1;");
+        main.setBackground(background);
+
         //8fbc8f green
         //b0e0e6 blue
         //d8bfd8 light purple
@@ -62,7 +71,7 @@ public class MenuScene {
         resize.setPreserveRatio(true);
 
         Text resizeText = new Text("Resize");
-        resizeText.setFont(new Font("Cambria", 20));
+        resizeText.setFont(font1);
         VBox resizeBox = new VBox();
         resizeBox.setAlignment(Pos.CENTER);
         resizeBox.getChildren().addAll(resize, resizeText);
@@ -75,7 +84,7 @@ public class MenuScene {
         watermark.setPreserveRatio(true);
 
         Text watermarkText = new Text("Watermark");
-        watermarkText.setFont(new Font("Cambria", 20));
+        watermarkText.setFont(new Font("Halloween Funtime", 20));
         VBox watermarkBox = new VBox();
         watermarkBox.setAlignment(Pos.CENTER);
         watermarkBox.getChildren().addAll(watermark, watermarkText);
@@ -98,7 +107,7 @@ public class MenuScene {
 //        ds.setSpread(0.1);
 
 
-        title.setFont(new Font("Cambria", 60));
+        title.setFont(font1);
 //        title.setEffect(ds);
 
 
