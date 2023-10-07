@@ -27,7 +27,6 @@ public class WaterMarkPropertyPane extends VBox {
         this.listImageModel = listImageModel;
         watermarkController = new WaterMarkController(listImageModel, ChooseType.WATERMARK);
 
-
         // Font in OS
         fontsList = FXCollections.observableArrayList(Font.getFontNames());
 

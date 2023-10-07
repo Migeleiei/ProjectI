@@ -14,7 +14,7 @@ public class Constants {
     public static final int DEFAULT_IMAGE_MIN_WIDTH = 250;
 
     // Title in Dialog
-    public static final String TITLE_SAVE_DIALOG = "Save Image MigelEiEi";
+    public static final String TITLE_SAVE_DIALOG = "Save Image";
     public static final String CONTENT_TYPE_ERROR = "Not support type";
     public static final String TITLE_TYPE_ERROR = "File not Support";
     public static final String CONTENT_ZIP_DONT_HAVE_IMAGE = "Zip File don't have any file Image";

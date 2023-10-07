@@ -147,6 +147,7 @@ public class DropScene {
                             isError = false;
                         } else {
                             isError = true;
+
                             showErrorTypeDialog("");
 
                         }
@@ -254,7 +255,7 @@ public class DropScene {
                         showErrorTypeDialog(Constants.CONTENT_ZIP_DONT_HAVE_IMAGE);
                         return false;
                     }
-                    //without check error because filter only image
+//                    without check error because filter only image
 //                    else {
 //                        showErrorTypeDialog();
 //                        return false;
@@ -278,17 +279,17 @@ public class DropScene {
     }
 
 
+    private void showErrorTypeDialog(String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
+        alert.setTitle(Constants.TITLE_TYPE_ERROR);
+        alert.show();
+    }
 //    private void showErrorTypeDialog(String content) {
 //        Alert alert = new Alert(Alert.AlertType.WARNING);
-//        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
+//        alert.setContentText(content.isEmpty() ? content : Constants.CONTENT_TYPE_ERROR);
 //        alert.setTitle(Constants.TITLE_TYPE_ERROR);
 //        alert.show();
 //    }
-    private void showErrorTypeDialog(String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText(content.isEmpty() ? content : Constants.CONTENT_TYPE_ERROR);
-        alert.setTitle(content);
-        alert.show();
-    }
 
 }
