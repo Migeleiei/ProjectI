@@ -56,8 +56,6 @@ public class ResizePropertyPane extends VBox {
         gridPane.add(heightField, 3, 0);
 
         // Row 2
-
-
         CheckBox cKeepRatio = new CheckBox();
         cKeepRatio.setSelected(Constants.IS_KEEP_RATIO);
 

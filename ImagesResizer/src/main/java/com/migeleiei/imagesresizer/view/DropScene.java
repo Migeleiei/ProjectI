@@ -148,6 +148,7 @@ public class DropScene {
                         } else {
                             isError = true;
                             showErrorTypeDialog("");
+
                         }
 
                     }
@@ -277,10 +278,16 @@ public class DropScene {
     }
 
 
+//    private void showErrorTypeDialog(String content) {
+//        Alert alert = new Alert(Alert.AlertType.WARNING);
+//        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
+//        alert.setTitle(Constants.TITLE_TYPE_ERROR);
+//        alert.show();
+//    }
     private void showErrorTypeDialog(String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
-        alert.setTitle(Constants.TITLE_TYPE_ERROR);
+        alert.setContentText(content.isEmpty() ? content : Constants.CONTENT_TYPE_ERROR);
+        alert.setTitle(content);
         alert.show();
     }
 

@@ -100,7 +100,6 @@ public class UtilImage{
     }
 
 
-
     public static Image convertToFxImage(BufferedImage image) {
         WritableImage wr = null;
         if (image != null) {

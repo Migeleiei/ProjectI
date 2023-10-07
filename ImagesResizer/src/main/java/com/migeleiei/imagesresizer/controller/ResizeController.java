@@ -25,7 +25,7 @@ public class ResizeController {
         this.chooseType = chooseType;
     }
 
-
+    //set the ratio
     public void setKeepRatio(CheckBox keepRatio) {
         keepRatio.selectedProperty().addListener((ob, o, n) -> {
             listImageModel.forEach(i -> {
@@ -35,7 +35,7 @@ public class ResizeController {
         });
     }
 
-
+    
     public void addWidthListener(final TextField textField) {
         textField.textProperty().addListener((ob, o, n) -> {
 
@@ -177,7 +177,7 @@ public class ResizeController {
                 }
 
             });
-            System.out.println("MigelEiEi Save images are success");
+            System.out.println("Save images are success");
             showSaveImageSuccess();
         });
     }

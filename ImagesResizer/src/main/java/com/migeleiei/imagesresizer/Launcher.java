@@ -1,6 +1,6 @@
 package com.migeleiei.imagesresizer;
 /**
- * Author MigelEiEi or Seksan Jomchanasuk and .....
+ * Author MigelEiEi or Seksan Jomchanasuk and Chonthicha Maitham
  */
 
 import com.migeleiei.imagesresizer.model.ChooseType;
