@@ -14,9 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -57,12 +59,13 @@ public class DropScene {
         vBox.setAlignment(Pos.CENTER);
         hBox.setAlignment(Pos.CENTER);
 
+        hBox.setBackground(Background.fill(Color.valueOf("#CBC3E3")));
         String imagePath = Objects.requireNonNull(Launcher.class.getResource("/images/dropfile.png")).toURI().toString();
         ImageView image = new ImageView(imagePath);
 
-        Button openBtn = new Button("Choose Files");
-        vBox.getChildren().add(image);
-        vBox.setSpacing(10);
+//        Button openBtn = new Button("Choose Files");
+//        vBox.getChildren().add(image);
+//        vBox.setSpacing(10);
 
 //        FileChooser fileChooser = new FileChooser();
 //        fileChooser.setTitle("Open Multiple Files");
@@ -190,6 +193,8 @@ public class DropScene {
                 e.consume();
             }
         });
+
+
 
         hBox.getChildren().add(vBox);
         return hBox;
