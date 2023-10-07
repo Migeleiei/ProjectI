@@ -46,8 +46,8 @@ public class WaterMarkController {
                     saveImageThread.start();
 
                 } else {
-                    String fileNameDialog = fileDialog.getName();
-                    String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileDialog.getName().length());
+                   // String fileNameDialog = fileDialog.getName();
+                 //   String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileDialog.getName().length());//
                     //have > 1 save same original
 //                    File fileOrigi = new File(i.getPathImage());
                     String fileName = i.getImageName();
