@@ -120,6 +120,17 @@ public class ResizeController {
         });
     }
 
+//    private Boolean isNumber(String str) {
+//
+//        try {
+//            int intValue = Integer.parseInt(str);
+//            return true;
+//        } catch (NumberFormatException e) {
+//
+//            showErrorTypeDialog(Constants.ALERT_TYPE_NOT_SUPPORT);
+//        }
+//        return false;
+//    }
     private Boolean isNumber(String str) {
 
         try {
@@ -138,7 +149,13 @@ public class ResizeController {
         alert.setTitle(Constants.TITLE_TYPE_ERROR);
         alert.show();
     }
+    //*******************************************
+    public void onClickBackButton(Button button1){
+        button1.setOnAction(e -> {
 
+
+        });
+    }
 
     public void onClickSaveButton(Button button) {
 

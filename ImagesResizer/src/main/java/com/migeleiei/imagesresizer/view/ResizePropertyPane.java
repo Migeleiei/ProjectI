@@ -25,9 +25,12 @@ public class ResizePropertyPane extends VBox {
         Button saveButton = new Button("Save");
         resizeController.onClickSaveButton(saveButton);
         setAlignment(Pos.CENTER);
-
         getChildren().add(resizeProperty());
         getChildren().add(saveButton);
+
+        Button backButton = new Button("back");
+        setAlignment(Pos.TOP_LEFT);
+
     }
 
 

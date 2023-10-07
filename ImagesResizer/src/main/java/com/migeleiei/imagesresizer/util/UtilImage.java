@@ -98,8 +98,7 @@ public class UtilImage{
         return sourceImage;
 
     }
-
-
+    //bufferImageSwing
     public static Image convertToFxImage(BufferedImage image) {
         WritableImage wr = null;
         if (image != null) {
