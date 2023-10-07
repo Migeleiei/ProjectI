@@ -2,13 +2,11 @@ package com.migeleiei.imagesresizer.view;
 
 import com.migeleiei.imagesresizer.Launcher;
 import com.migeleiei.imagesresizer.controller.SceneController;
-import com.migeleiei.imagesresizer.controller.WaterMarkController;
-import com.migeleiei.imagesresizer.util.ChooseType;
+import com.migeleiei.imagesresizer.model.ChooseType;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;

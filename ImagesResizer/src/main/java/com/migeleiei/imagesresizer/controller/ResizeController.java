@@ -1,8 +1,8 @@
 package com.migeleiei.imagesresizer.controller;
 
 import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.util.ChooseType;
-import com.migeleiei.imagesresizer.util.Constants;
+import com.migeleiei.imagesresizer.model.ChooseType;
+import com.migeleiei.imagesresizer.model.Constants;
 import com.migeleiei.imagesresizer.util.SaveImageThread;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;

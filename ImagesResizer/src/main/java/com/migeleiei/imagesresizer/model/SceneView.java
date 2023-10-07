@@ -1,4 +1,4 @@
-package com.migeleiei.imagesresizer.util;
+package com.migeleiei.imagesresizer.model;
 
 public enum SceneView {
     MAIN,

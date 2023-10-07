@@ -2,8 +2,8 @@ package com.migeleiei.imagesresizer.view;
 
 
 import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.util.ChooseType;
-import com.migeleiei.imagesresizer.util.Constants;
+import com.migeleiei.imagesresizer.model.ChooseType;
+import com.migeleiei.imagesresizer.model.Constants;
 import javafx.beans.property.*;
 
 import javafx.collections.ObservableList;

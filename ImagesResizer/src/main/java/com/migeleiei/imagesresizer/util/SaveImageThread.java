@@ -1,5 +1,6 @@
 package com.migeleiei.imagesresizer.util;
 
+import com.migeleiei.imagesresizer.model.ChooseType;
 import com.migeleiei.imagesresizer.model.ImageModel;
 
 import javax.imageio.ImageIO;

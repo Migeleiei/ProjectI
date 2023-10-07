@@ -3,9 +3,8 @@ package com.migeleiei.imagesresizer;
  * Author MigelEiEi or Seksan Jomchanasuk and .....
  */
 
-import com.migeleiei.imagesresizer.util.ChooseType;
+import com.migeleiei.imagesresizer.model.ChooseType;
 import com.migeleiei.imagesresizer.view.DropScene;
-import com.migeleiei.imagesresizer.view.MainScene;
 import com.migeleiei.imagesresizer.view.MenuScene;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;

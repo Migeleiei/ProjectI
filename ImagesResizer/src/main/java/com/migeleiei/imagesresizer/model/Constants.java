@@ -1,4 +1,4 @@
-package com.migeleiei.imagesresizer.util;
+package com.migeleiei.imagesresizer.model;
 
 import java.util.Arrays;
 import java.util.List;
