@@ -131,16 +131,20 @@ public class ResizeController {
 //        }
 //        return false;
 //    }
+
     private Boolean isNumber(String str) {
+        if (str == null || str.trim().isEmpty()) {
+            // Handle empty or null input here if needed
+            return false;
+        }
 
         try {
             int intValue = Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
-
-            showErrorTypeDialog(Constants.ALERT_TYPE_NOT_SUPPORT);
+            // This block will be executed only when the input is not a valid integer
+            return false;
         }
-        return false;
     }
 
     private void showErrorTypeDialog(String content) {

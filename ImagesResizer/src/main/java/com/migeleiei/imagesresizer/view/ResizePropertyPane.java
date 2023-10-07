@@ -30,7 +30,6 @@ public class ResizePropertyPane extends VBox {
 
         Button backButton = new Button("back");
         setAlignment(Pos.TOP_LEFT);
-
     }
 
 
