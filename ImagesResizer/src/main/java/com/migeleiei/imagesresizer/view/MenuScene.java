@@ -30,8 +30,10 @@ public class MenuScene {
     }
 
     private Pane menuPane() throws URISyntaxException {
-        Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),50);
+        Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),20);
         Image backgroundImage = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/1.png")).toURI().toString());
+
+        Font font2 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),50);
 
         ImageView backgroundImageView = new ImageView(backgroundImage);
         backgroundImageView.setFitWidth(600); // Set the width to match your scene size
@@ -83,7 +85,7 @@ public class MenuScene {
         watermark.setPreserveRatio(true);
 
         Text watermarkText = new Text("Watermark");
-        watermarkText.setFont(new Font("Halloween Funtime", 20));
+        watermarkText.setFont(font1);
         VBox watermarkBox = new VBox();
         watermarkBox.setAlignment(Pos.CENTER);
         watermarkBox.getChildren().addAll(watermark, watermarkText);
@@ -106,7 +108,8 @@ public class MenuScene {
 //        ds.setSpread(0.1);
 
 
-        title.setFont(font1);
+        title.setFont(font2);
+
 //        title.setEffect(ds);
 
 
