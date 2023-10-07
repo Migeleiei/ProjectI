@@ -47,7 +47,7 @@ public class MainScene {
         ResizePropertyPane resizePropertyPane = new ResizePropertyPane(listImageModel);
 
 
-        rightPane.setBackground(Background.fill(Color.valueOf("#919aea")));
+        rightPane.setBackground(Background.fill(Color.valueOf("#C8DEFA")));
 
         leftPane.prefWidthProperty().bind(mainPain.widthProperty().divide(4 / 2));
         leftPane.prefHeightProperty().bind(mainPain.heightProperty());

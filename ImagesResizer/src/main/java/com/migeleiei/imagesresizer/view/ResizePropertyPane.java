@@ -22,14 +22,17 @@ public class ResizePropertyPane extends VBox {
         this.listImageModel = listImageModel;
         resizeController = new ResizeController(this.listImageModel, ChooseType.RESIZE);
 
+        //add save button
         Button saveButton = new Button("Save");
         resizeController.onClickSaveButton(saveButton);
         setAlignment(Pos.CENTER);
         getChildren().add(resizeProperty());
         getChildren().add(saveButton);
 
+        //add back button
         Button backButton = new Button("back");
-        setAlignment(Pos.TOP_LEFT);
+        backButton.setAlignment(Pos.TOP_LEFT);
+
     }
 
 

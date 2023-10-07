@@ -285,11 +285,5 @@ public class DropScene {
         alert.setTitle(Constants.TITLE_TYPE_ERROR);
         alert.show();
     }
-//    private void showErrorTypeDialog(String content) {
-//        Alert alert = new Alert(Alert.AlertType.WARNING);
-//        alert.setContentText(content.isEmpty() ? content : Constants.CONTENT_TYPE_ERROR);
-//        alert.setTitle(Constants.TITLE_TYPE_ERROR);
-//        alert.show();
-//    }
 
 }

@@ -28,11 +28,11 @@ public class Launcher extends Application {
 
 
 
-        // first time
-        stage.setTitle("Project");
+
+        stage.setTitle("Flob Project");
         stage.setScene(meScene);
         stage.show();
-
+        // switch scene
         chooseTypeObjectProperty.addListener((ob, o, n) -> {
 
             switch (n) {
@@ -49,7 +49,7 @@ public class Launcher extends Application {
                     stage.show();
                 }
                 case WATERMARK -> {
-                    stage.setTitle("Project");
+                    stage.setTitle("Drop your Image");
                     DropScene dropScene = new DropScene(n);
                     Scene dScene = null;
                     try {
