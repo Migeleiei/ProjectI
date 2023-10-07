@@ -120,17 +120,6 @@ public class ResizeController {
         });
     }
 
-//    private Boolean isNumber(String str) {
-//
-//        try {
-//            int intValue = Integer.parseInt(str);
-//            return true;
-//        } catch (NumberFormatException e) {
-//
-//            showErrorTypeDialog(Constants.ALERT_TYPE_NOT_SUPPORT);
-//        }
-//        return false;
-//    }
 
     private Boolean isNumber(String str) {
         if (str == null || str.trim().isEmpty()) {
