@@ -9,7 +9,6 @@ public class SceneController {
 
     public void addSceneController(ImageView imageView, ObjectProperty<ChooseType> chooseTypeObjectProperty, ChooseType chooseType) {
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println("dddd");
             chooseTypeObjectProperty.set(chooseType);
         });
     }

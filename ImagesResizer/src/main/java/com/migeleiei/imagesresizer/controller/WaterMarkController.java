@@ -29,7 +29,7 @@ public class WaterMarkController {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle(Constants.TITLE_SAVE_DIALOG);
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files",  "*.png","*.jpg", "*.jpeg"));
 
             File fileDialog = fileChooser.showSaveDialog(stage);
             String pathTo = fileDialog.getPath();

@@ -48,7 +48,7 @@ public class DropScene {
 
 
     public HBox dropPane() throws URISyntaxException {
-        //List<String> pathListImage = new ArrayList<>();
+        List<String> pathListImage = new ArrayList<>();
 
 
         HBox hBox = new HBox();
@@ -103,7 +103,7 @@ public class DropScene {
 //
 //        });
 
-        //after drop the file and show alert if error
+
         hBox.setOnDragDropped(e -> {
             Dragboard db = e.getDragboard();
             boolean isError = false;
@@ -124,10 +124,9 @@ public class DropScene {
 
                         filePath = file.getAbsolutePath();
                         String fileType = getFileExtension(filePath);
-                        //check all file
+
                         if (Constants.LIST_FILE_IMAGE.contains(fileType)) {
                             ImageModel imageModel = null;
-                            //change to buffer img and keep the value of file
                             try {
                                 BufferedImage bf = ImageIO.read(new File(filePath));
                                 imageModel = new ImageModel(
@@ -146,7 +145,6 @@ public class DropScene {
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
-                            //throw to list and keep it
                             listImageModel.add(imageModel);
 
                             isError = false;
@@ -161,7 +159,6 @@ public class DropScene {
                 }
 
                 e.setDropCompleted(success);
-                //if error go to main scene
                 if (!isError) {
                     MainScene mainScene = new MainScene(this.chooseType, listImageModel);
                     Stage stage1 = new Stage();
@@ -208,7 +205,7 @@ public class DropScene {
         int lastDot = fileFullName.lastIndexOf('.');
         return (lastDot == -1) ? "" : fileFullName.substring(lastDot + 1);
     }
-    //just read zip file doesn't extract it
+
     private boolean readZipFile(File file) {
         ZipFile zipFile = null;
         ZipInputStream zis;
@@ -231,7 +228,7 @@ public class DropScene {
 
                 InputStream inputStream = zipFile.getInputStream(zipEntry);
                 String extension = getFileExtension(zipEntry.getName());
-                //in mac has a hidden file(.,_) that make the system is confuses
+
                 String hiddenFile = zipEntry.getName();
                 char symbol = hiddenFile.charAt(0);
 

@@ -21,7 +21,7 @@ public class Constants {
     public static final String TITLE_RESIZE_SCENE = "Resize";
     public static final String TITLE_WATERMARK_SCENE = "Add Watermark";
 
-    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg", "JPG");
+    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg", "JPG","PNG");
 
     public static final Boolean IS_KEEP_RATIO = true;
 

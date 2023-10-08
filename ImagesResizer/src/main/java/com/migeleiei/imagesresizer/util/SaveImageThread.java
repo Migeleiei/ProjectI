@@ -34,7 +34,7 @@ public class SaveImageThread extends Thread {
         super.run();
         File abPath = new File(path,fileName);
 
-
+        System.out.println("Show abs path : "+abPath.getAbsolutePath());
 
         switch (this.chooseType) {
             case WATERMARK -> {

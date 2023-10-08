@@ -29,7 +29,7 @@ public class Launcher extends Application {
 
 
 
-        stage.setTitle("Flob Project");
+        stage.setTitle("Floptopica Project");
         stage.setScene(meScene);
         stage.show();
         // switch scene
