@@ -97,11 +97,12 @@ public class ResizeController {
             if (isNumber(n)) {
                 int percent = Integer.parseInt(n);
 
+
                 if (percent > Constants.PERCENTAGE_MAX_FOR_RESIZE_IMAGE) {
                     percent = Constants.PERCENTAGE_MAX_FOR_RESIZE_IMAGE;
                     textField.setText("" + Constants.PERCENTAGE_MAX_FOR_RESIZE_IMAGE);
                 }
-                ;
+
                 if (percent == 0) {
                     listImageModel.forEach(i -> {
                         i.setPercentProperty(100);
@@ -110,6 +111,7 @@ public class ResizeController {
                 } else {
 
                     int finalPercent = percent;
+
                     listImageModel.forEach(i -> {
                         i.setPercentProperty(finalPercent);
                         i.setModelProperty(finalPercent);
@@ -145,39 +147,6 @@ public class ResizeController {
         alert.show();
     }
 
-    //set on back action
-    public void onClickBackButton(Button button1) {
-        button1.setOnAction(e -> {
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle(Constants.TITLE_SAVE_DIALOG);
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png"));
-
-            File fileDialog = fileChooser.showSaveDialog(stage);
-
-            String pathTo = fileDialog.getPath();
-
-            // Check if there are any images to save
-            if (!listImageModel.isEmpty()) {
-                listImageModel.forEach(i -> {
-                    String fileNameDialog = fileDialog.getName();
-                    String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileNameDialog.length());
-                    String fileName = i.getImageName();
-
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName, this.chooseType);
-                    saveImageThread.start();
-                });
-
-                System.out.println("Save images are success");
-                showSaveImageSuccess();
-            } else {
-                // Handle the case where there are no images to save (e.g., show an error message).
-            }
-
-        });
-
-        // Add the back button to your layout or UI as needed.
-    }
 
 
     //set on save action

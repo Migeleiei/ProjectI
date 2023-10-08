@@ -53,48 +53,46 @@ public class SaveImageThread extends Thread {
 
     private void resizeImage(ImageModel img, File destImageFile) {
 
-        int percent = img.percentPropertyProperty().get() / 100;
-        //value that user set it
-        int width = img.widthImagePropertyProperty().get() * percent;
-        int height = img.heightImagePropertyProperty().get() * percent;
+        double percent = (double) img.percentPropertyProperty().get() / 100;
+        int originalWidth = img.bufferedImageProperty().get().getWidth();
+        int originalHeight = img.bufferedImageProperty().get().getHeight();
 
-        //buffer is original value
-        if (width == 0) {
-            width = img.bufferedImageProperty().get().getWidth();
-        } else if (height == 0) {
-            height = img.bufferedImageProperty().get().getHeight();
-        }
+        // dimension from property
+        int width = img.widthImagePropertyProperty().get() ;
+        int height = img.heightImagePropertyProperty().get() ;
 
-        if (img.keepRatioPropertyProperty().get()) {
+        if(percent == 1 ){
 
-            if (img.heightImagePropertyProperty().get() == 0 && img.widthImagePropertyProperty().get() == 0) {
-                width = img.bufferedImageProperty().get().getWidth() * percent;
-                height = img.bufferedImageProperty().get().getHeight() * percent;
-            } else if (img.heightImagePropertyProperty().get() == 0) {
-                double scale = (double) img.bufferedImageProperty().get().getHeight() / img.bufferedImageProperty().get().getWidth();
-
-
-                width = img.widthImagePropertyProperty().get() * percent;
-                height = (int) (width * scale);
-
-            } else if (img.widthImagePropertyProperty().get() == 0) {
+            if(img.keepRatioPropertyProperty().get()){
+                if (img.widthImagePropertyProperty().get() == 0) {
                 double scale = (double) img.bufferedImageProperty().get().getWidth() / img.bufferedImageProperty().get().getHeight();
 
 
-                height = img.heightImagePropertyProperty().get() * percent;
+                height = (int) (img.heightImagePropertyProperty().get() * percent);
                 width = (int) (height * scale);
             } else {
 
                 double scale = (double) img.bufferedImageProperty().get().getHeight() / img.bufferedImageProperty().get().getWidth();
 
 
-                width = img.widthImagePropertyProperty().get() * percent;
+                width = (int) (img.widthImagePropertyProperty().get() * percent);
 
                 height = (int) (width * scale);
 
 
             }
+
+            }else{
+                width = img.widthImagePropertyProperty().get();
+                height = img.heightImagePropertyProperty().get();
+            }
+
+        }else{
+
+              width = (int) (originalWidth * percent);
+              height = (int) (originalHeight * percent);
         }
+
 
 
         try {
