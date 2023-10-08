@@ -11,13 +11,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public class WaterMarkController {
 
     private ObservableList<ImageModel> listImageModel;
     private ChooseType chooseType;
 
-    public WaterMarkController(ObservableList<ImageModel> listImageModel,ChooseType chooseType) {
+    public WaterMarkController(ObservableList<ImageModel> listImageModel, ChooseType chooseType) {
         this.listImageModel = listImageModel;
         this.chooseType = chooseType;
     }
@@ -31,35 +32,31 @@ public class WaterMarkController {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png"));
 
             File fileDialog = fileChooser.showSaveDialog(stage);
-
-
             String pathTo = fileDialog.getPath();
+            File file = new File(pathTo);
+            String pathParent = file.getParent();
+            String fileName = fileDialog.getName();
 
-            //Check has image
-            listImageModel.forEach(i -> {
+            for (int ix = 0; ix < listImageModel.size(); ix++) {
+                ImageModel i = listImageModel.get(ix);
                 //have 1 image save name input
                 if (listImageModel.size() == 1) {
 
-                    String fileName = fileDialog.getName();
-
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName,this.chooseType);
+                    SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, fileName, this.chooseType);
                     saveImageThread.start();
 
                 } else {
-                   // String fileNameDialog = fileDialog.getName();
-                 //   String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileDialog.getName().length());//
-                    //have > 1 save same original
-//                    File fileOrigi = new File(i.getPathImage());
-                    String fileName = i.getImageName();
 
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName,this.chooseType);
+                    String newFileName = "(" + ix + ")" + fileName;
+
+                    SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, newFileName, this.chooseType);
                     saveImageThread.start();
 
 
                 }
 
 
-            });
+            }
 
             System.out.println("Save images are success");
             showSaveImageSuccess();
@@ -108,7 +105,6 @@ public class WaterMarkController {
     }
 
 
-
     public void addSelectFontListener(final ComboBox<String> combo) {
         combo.setOnAction(e -> {
             listImageModel.forEach(i -> {
@@ -145,7 +141,7 @@ public class WaterMarkController {
     }
 
 
-    private void showSaveImageSuccess(){
+    private void showSaveImageSuccess() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Save Image with Watermark");
         alert.setHeaderText(null);

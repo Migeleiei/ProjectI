@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class SaveImageThread extends Thread {
 
@@ -31,15 +32,17 @@ public class SaveImageThread extends Thread {
     @Override
     public void run() {
         super.run();
+        File abPath = new File(path,fileName);
+
 
 
         switch (this.chooseType) {
             case WATERMARK -> {
-                addTextWatermark(this.img, new File(path + fileName));
+                addTextWatermark(this.img, abPath);
             }
             case RESIZE -> {
 
-                resizeImage(this.img, new File(path + fileName));
+                resizeImage(this.img, abPath);
 
             }
 

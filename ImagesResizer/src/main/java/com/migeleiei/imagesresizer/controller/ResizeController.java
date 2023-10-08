@@ -191,34 +191,31 @@ public class ResizeController {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png"));
 
             File fileDialog = fileChooser.showSaveDialog(stage);
-
-
             String pathTo = fileDialog.getPath();
+            File file = new File(pathTo);
+            String pathParent = file.getParent();
+            String fileName = fileDialog.getName();
 
-            //Check has image
-            listImageModel.forEach(i -> {
-                //have 1 image save name input
+            for (int ix = 0; ix < listImageModel.size(); ix++) {
+                ImageModel i = listImageModel.get(ix);
+
                 if (listImageModel.size() == 1) {
 
-                    String fileName = fileDialog.getName();
-
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName, this.chooseType);
+                    SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, fileName, this.chooseType);
                     saveImageThread.start();
 
                 } else {
-                    String fileNameDialog = fileDialog.getName();
-                    String fileExtension = fileNameDialog.substring(fileNameDialog.lastIndexOf(".") + 1, fileDialog.getName().length());
-                    //have > 1 save same original
-//                    File fileOrigi = new File(i.getPathImage());
-                    String fileName = i.getImageName();
 
-                    SaveImageThread saveImageThread = new SaveImageThread(i, pathTo, fileName, this.chooseType);
+                    String newFileName = "(" + ix + ")" + fileName;
+
+                    SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, newFileName, this.chooseType);
                     saveImageThread.start();
 
 
                 }
 
-            });
+            }
+
             System.out.println("Save images are success");
             showSaveImageSuccess();
         });
