@@ -1,9 +1,9 @@
-module com.migeleiei.imagesresizer {
+module com.migeleiei.TermProjectI {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
 
 
-    opens com.migeleiei.imagesresizer to javafx.fxml;
-    exports com.migeleiei.imagesresizer;
+    opens se233.TermProjectI to javafx.fxml;
+    exports se233.TermProjectI;
 }

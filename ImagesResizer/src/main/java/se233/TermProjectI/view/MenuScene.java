@@ -1,14 +1,16 @@
-package com.migeleiei.imagesresizer.view;
+package se233.TermProjectI.view;
 
-import com.migeleiei.imagesresizer.Launcher;
-import com.migeleiei.imagesresizer.controller.SceneController;
-import com.migeleiei.imagesresizer.model.ChooseType;
+import se233.TermProjectI.Launcher;
+import se233.TermProjectI.controller.SceneController;
+import se233.TermProjectI.model.ChooseType;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -31,10 +33,10 @@ public class MenuScene {
     }
 
     private Pane menuPane() throws URISyntaxException {
-        Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),20);
+        Font font1 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(), 20);
         Image backgroundImage = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/1.png")).toURI().toString());
 
-        Font font2 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(),50);
+        Font font2 = Font.loadFont(Objects.requireNonNull(Launcher.class.getResource("/fonts/Halloween-Funtime.ttf")).toURI().toString(), 50);
 
         ImageView backgroundImageView = new ImageView(backgroundImage);
         backgroundImageView.setFitWidth(600); // Set the width to match your scene size
@@ -48,13 +50,7 @@ public class MenuScene {
         main.setSpacing(60);
         main.setFillWidth(true);
         main.setAlignment(Pos.CENTER);
-//        main.setStyle("-fx-background-color: #ffb6c1;");
         main.setBackground(background);
-
-        //8fbc8f green
-        //b0e0e6 blue
-        //d8bfd8 light purple
-        //ffc87c yellow
 
 
 
@@ -93,25 +89,21 @@ public class MenuScene {
 
         menu.getChildren().addAll(resizeBox, watermarkBox);
 
-//
-
-        ///
 //        addListen SceneController
         sceneController.addSceneController(resize, chooseTypeObjectProperty, ChooseType.RESIZE);
         sceneController.addSceneController(watermark, chooseTypeObjectProperty, ChooseType.WATERMARK);
 
         Text title = new Text("Select Tool");
 
-        // Effect
-//        DropShadow ds = new DropShadow();
-//        ds.setOffsetY(3.0f);
-//        ds.setColor(Color.color(0.4, 0.4, 0.4));
-//        ds.setSpread(0.1);
+
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(3.0f);
+        ds.setColor(Color.color(0.4, 0.4, 0.4));
+        ds.setSpread(0.4);
 
 
         title.setFont(font2);
-
-//        title.setEffect(ds);
+        title.setEffect(ds);
 
 
         main.getChildren().add(title);

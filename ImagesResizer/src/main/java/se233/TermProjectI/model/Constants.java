@@ -1,4 +1,4 @@
-package com.migeleiei.imagesresizer.model;
+package se233.TermProjectI.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,15 +21,11 @@ public class Constants {
     public static final String TITLE_RESIZE_SCENE = "Resize";
     public static final String TITLE_WATERMARK_SCENE = "Add Watermark";
 
-    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg", "JPG","PNG");
+    public static final List<String> LIST_FILE_IMAGE = Arrays.asList("png", "jpg", "jpeg", "JPG", "PNG");
 
     public static final Boolean IS_KEEP_RATIO = true;
 
-    public static final SceneView SCENE_DEFAULT = SceneView.MENU;
     public static final List<Character> LIST_HIDDEN_FILE = Arrays.asList('.', '_');
-
-    // for TextField recieve number but user input another
-    public static final String ALERT_TYPE_NOT_SUPPORT = "Input type not allow use number only";
 
     public static final int PERCENTAGE_MAX_FOR_RESIZE_IMAGE = 200;
 

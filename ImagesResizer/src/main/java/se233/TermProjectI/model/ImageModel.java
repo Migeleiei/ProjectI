@@ -1,8 +1,9 @@
-package com.migeleiei.imagesresizer.model;
+package se233.TermProjectI.model;
 
 import javafx.beans.property.*;
 
 import java.awt.image.BufferedImage;
+
 //INfo img
 public class ImageModel {
 
@@ -33,11 +34,6 @@ public class ImageModel {
 
 
     private final IntegerProperty percentProperty = new SimpleIntegerProperty();
-
-
-    public ImageModel() {
-
-    }
 
     public ImageModel(String path, String color, int fontSize, String fontFamily, double opacity,
                       BufferedImage bufferedImage, String imageName, boolean keepRatio,
@@ -160,7 +156,6 @@ public class ImageModel {
     public void setPercentProperty(int percentProperty) {
         this.percentProperty.set(percentProperty);
     }
-
 
 
     public IntegerProperty widthImagePropertyProperty() {

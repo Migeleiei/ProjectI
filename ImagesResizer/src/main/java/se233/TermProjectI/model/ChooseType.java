@@ -1,4 +1,4 @@
-package com.migeleiei.imagesresizer.model;
+package se233.TermProjectI.model;
 
 public enum ChooseType {
     RESIZE,

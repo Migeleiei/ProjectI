@@ -1,6 +1,6 @@
-package com.migeleiei.imagesresizer.controller;
+package se233.TermProjectI.controller;
 
-import com.migeleiei.imagesresizer.model.ChooseType;
+import se233.TermProjectI.model.ChooseType;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

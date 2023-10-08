@@ -1,16 +1,14 @@
-package com.migeleiei.imagesresizer.controller;
+package se233.TermProjectI.controller;
 
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.model.Constants;
-import com.migeleiei.imagesresizer.util.SaveImageThread;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.model.Constants;
+import se233.TermProjectI.util.SaveImageThread;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -37,7 +35,7 @@ public class ResizeController {
         });
     }
 
-    
+
     public void addWidthListener(final TextField textField) {
         textField.textProperty().addListener((ob, o, n) -> {
 
@@ -140,12 +138,6 @@ public class ResizeController {
         }
     }
 
-    private void showErrorTypeDialog(String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText(content.isEmpty() ? Constants.CONTENT_TYPE_ERROR : content);
-        alert.setTitle(Constants.TITLE_TYPE_ERROR);
-        alert.show();
-    }
 
 
 

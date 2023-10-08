@@ -1,9 +1,9 @@
-package com.migeleiei.imagesresizer.view;
+package se233.TermProjectI.view;
 
 
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.model.Constants;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.model.Constants;
 import javafx.beans.property.*;
 
 import javafx.collections.ObservableList;
@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
 
 
 import java.net.URISyntaxException;
@@ -167,7 +166,6 @@ public class MainScene {
 
         return mainGridImg;
     }
-
 
 
 }

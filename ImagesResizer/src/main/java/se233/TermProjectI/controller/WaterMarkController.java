@@ -1,9 +1,9 @@
-package com.migeleiei.imagesresizer.controller;
+package se233.TermProjectI.controller;
 
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.model.Constants;
-import com.migeleiei.imagesresizer.util.SaveImageThread;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.model.Constants;
+import se233.TermProjectI.util.SaveImageThread;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -11,7 +11,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Path;
 
 public class WaterMarkController {
 
@@ -29,7 +28,7 @@ public class WaterMarkController {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle(Constants.TITLE_SAVE_DIALOG);
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files",  "*.png","*.jpg", "*.jpeg"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
             File fileDialog = fileChooser.showSaveDialog(stage);
             String pathTo = fileDialog.getPath();
@@ -41,27 +40,17 @@ public class WaterMarkController {
                 ImageModel i = listImageModel.get(ix);
                 //have 1 image save name input
                 if (listImageModel.size() == 1) {
-
                     SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, fileName, this.chooseType);
                     saveImageThread.start();
-
                 } else {
-
-                    String newFileName = fileName + "(" + ix + ")" ;
+                    String newFileName = fileName + "(" + ix + ")";
 
                     SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, newFileName, this.chooseType);
                     saveImageThread.start();
-
-
                 }
-
-
             }
-
             System.out.println("Save images are success");
             showSaveImageSuccess();
-
-
         });
     }
 
@@ -73,7 +62,6 @@ public class WaterMarkController {
             });
         });
     }
-
 
     public void addSliderFontSizeListener(Slider slider) {
         slider.valueProperty().addListener((observable, oldValue, n) -> {

@@ -1,25 +1,13 @@
-package com.migeleiei.imagesresizer.view;
+package se233.TermProjectI.view;
 
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.util.UtilImage;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.util.UtilImage;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -35,8 +23,6 @@ import javafx.stage.Stage;
 //import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.concurrent.Callable;
 
 public class ImageViewThread implements Callable<StackPane> {
@@ -62,9 +48,6 @@ public class ImageViewThread implements Callable<StackPane> {
 
     }
 
-
-    DoubleProperty widthProperty = new SimpleDoubleProperty();
-    DoubleProperty heightProperty = new SimpleDoubleProperty();
 
     private StackPane imageViewBufferedImage(ImageModel imgModel, IntegerProperty intColumn) {
         // cal to find the column

@@ -1,11 +1,11 @@
-package com.migeleiei.imagesresizer;
+package se233.TermProjectI;
 /**
  * Author MigelEiEi or Seksan Jomchanasuk and Chonthicha Maitham
  */
 
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.view.DropScene;
-import com.migeleiei.imagesresizer.view.MenuScene;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.view.DropScene;
+import se233.TermProjectI.view.MenuScene;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

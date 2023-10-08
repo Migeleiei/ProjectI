@@ -1,9 +1,9 @@
-package com.migeleiei.imagesresizer.view;
+package se233.TermProjectI.view;
 
-import com.migeleiei.imagesresizer.controller.WaterMarkController;
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.model.Constants;
+import se233.TermProjectI.controller.WaterMarkController;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.model.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -49,7 +49,6 @@ public class WaterMarkPropertyPane extends VBox {
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-
 
 
         Text text = new Text("Text");

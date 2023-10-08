@@ -1,9 +1,9 @@
-package com.migeleiei.imagesresizer.view;
+package se233.TermProjectI.view;
 
-import com.migeleiei.imagesresizer.controller.ResizeController;
-import com.migeleiei.imagesresizer.model.ImageModel;
-import com.migeleiei.imagesresizer.model.ChooseType;
-import com.migeleiei.imagesresizer.model.Constants;
+import se233.TermProjectI.controller.ResizeController;
+import se233.TermProjectI.model.ImageModel;
+import se233.TermProjectI.model.ChooseType;
+import se233.TermProjectI.model.Constants;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
