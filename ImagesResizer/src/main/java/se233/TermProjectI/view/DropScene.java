@@ -1,5 +1,7 @@
 package se233.TermProjectI.view;
 
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import se233.TermProjectI.Launcher;
 import se233.TermProjectI.model.ImageModel;
 import se233.TermProjectI.model.ChooseType;
@@ -12,9 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -47,11 +46,19 @@ public class DropScene {
         HBox hBox = new HBox();
         VBox vBox = new VBox();
 
+        Image backgroundImage = new Image(Objects.requireNonNull(Launcher.class.getResource("/images/2.png")).toURI().toString());
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(600); // Set the width to match your scene size
+        backgroundImageView.setFitHeight(400);
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage backgroundImageObj = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+        Background background = new Background(backgroundImageObj);
+
         vBox.setFillWidth(true);
         hBox.setFillHeight(true);
         vBox.setAlignment(Pos.CENTER);
         hBox.setAlignment(Pos.CENTER);
-        hBox.setBackground(Background.fill(Color.valueOf("#CBC3E3")));
+        hBox.setBackground(background);
 
         String imagePath = Objects.requireNonNull(Launcher.class.getResource("/images/dropfile.png")).toURI().toString();
         ImageView image = new ImageView(imagePath);
