@@ -64,8 +64,8 @@ public class DropScene {
         ImageView image = new ImageView(imagePath);
 
 //        Button openBtn = new Button("Choose Files");
-//        vBox.getChildren().add(image);
-//        vBox.setSpacing(10);
+        vBox.getChildren().add(image);
+        vBox.setSpacing(10);
 
 //        FileChooser fileChooser = new FileChooser();
 //        fileChooser.setTitle("Open Multiple Files");
