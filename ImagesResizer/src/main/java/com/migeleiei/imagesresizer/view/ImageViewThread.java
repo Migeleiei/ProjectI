@@ -67,9 +67,10 @@ public class ImageViewThread implements Callable<StackPane> {
     DoubleProperty heightProperty = new SimpleDoubleProperty();
 
     private StackPane imageViewBufferedImage(ImageModel imgModel, IntegerProperty intColumn) {
+        // cal to find the column
         StackPane imageStack = new StackPane();
 
-
+        //buffer -> img (done waiting to save)
         BufferedImage bufferedImage = imgModel.bufferedImageProperty().get();
 
         Image image = UtilImage.convertToFxImage(bufferedImage);
@@ -88,7 +89,7 @@ public class ImageViewThread implements Callable<StackPane> {
 
         Text textWaterMark = new Text();
 
-
+        //set it to new value as real time
         imgModel.getModelProperty().addListener((ob, o, n) -> {
 
             setTextProperties(textWaterMark, imageView, imgModel);
@@ -103,6 +104,7 @@ public class ImageViewThread implements Callable<StackPane> {
 
             setTextProperties(textWaterMark, imageView, imgModel);
         });
+
 
 
         //clip ImageView
@@ -165,7 +167,7 @@ public class ImageViewThread implements Callable<StackPane> {
                 stage.setTitle(fileName);
 
 
-                /////
+                //
                 Rectangle rectangle = new Rectangle();
                 double scale = (double) imgModel.bufferedImageProperty().get().getWidth() / imgModel.bufferedImageProperty().get().getHeight();
 
@@ -194,7 +196,7 @@ public class ImageViewThread implements Callable<StackPane> {
         });
     }
 
-
+    //return to stackPane
     @Override
     public StackPane call() throws Exception {
 

@@ -33,7 +33,7 @@ public class MainScene {
         this.listImageModel = listImageModel;
     }
 
-
+    //cal the GUI when user resize the GUI( we set defuse is 250)
     IntegerProperty columnProperty = new SimpleIntegerProperty();
 
 
@@ -49,9 +49,10 @@ public class MainScene {
 
         rightPane.setBackground(Background.fill(Color.valueOf("#C8DEFA")));
 
+        //responsive
         leftPane.prefWidthProperty().bind(mainPain.widthProperty().divide(4 / 2));
         leftPane.prefHeightProperty().bind(mainPain.heightProperty());
-        //rightSide_of_functions
+
         rightPane.prefWidthProperty().bind(mainPain.widthProperty().divide(4 / 2));
         rightPane.prefHeightProperty().bind(mainPain.heightProperty());
 
@@ -76,7 +77,7 @@ public class MainScene {
         return scene;
     }
 
-
+    //left side
     private VBox imageList(VBox vBox) {
 
         Pane gridPane = createImageGrid(vBox, listImageModel);
@@ -97,6 +98,7 @@ public class MainScene {
         mainGridImg.setHgap(5);
         mainGridImg.setVgap(5);
 
+        //cal to find the column
         leftPane.widthProperty().addListener((ob, o, n) -> {
             double width = leftPane.widthProperty().doubleValue();
             double column = width / Constants.DEFAULT_IMAGE_MIN_WIDTH;
@@ -108,7 +110,7 @@ public class MainScene {
             }
         });
 
-
+        //show at the position in the img
         int indexRow = 0;
         int indexColumn = 0;
 

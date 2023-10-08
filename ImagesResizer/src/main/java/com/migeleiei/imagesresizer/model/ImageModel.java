@@ -3,10 +3,11 @@ package com.migeleiei.imagesresizer.model;
 import javafx.beans.property.*;
 
 import java.awt.image.BufferedImage;
-
+//INfo img
 public class ImageModel {
 
     // new for BufferedImage
+    //property declare การเปลี่ยนแปลง
     private final ObjectProperty<BufferedImage> bufferedImageProperty = new SimpleObjectProperty<>();
     private String pathImage;
     private String imageName;
@@ -15,6 +16,8 @@ public class ImageModel {
 
     private final IntegerProperty textWaterMarkSize = new SimpleIntegerProperty();
     private final StringProperty textWaterMark = new SimpleStringProperty();
+
+    //ไว้ดูการเปลี่ยนแปลง
     private final ObjectProperty<Object> isChange = new SimpleObjectProperty<>();
 
     private final DoubleProperty textOpacityProperty = new SimpleDoubleProperty();

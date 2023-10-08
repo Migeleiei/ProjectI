@@ -18,7 +18,7 @@ public class WaterMarkPropertyPane extends VBox {
 
     //Font in OS
     ObservableList<String> fontsList;
-
+    //******
     ObservableList<ImageModel> listImageModel;
     WaterMarkController watermarkController;
 

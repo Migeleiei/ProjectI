@@ -54,10 +54,11 @@ public class SaveImageThread extends Thread {
     private void resizeImage(ImageModel img, File destImageFile) {
 
         int percent = img.percentPropertyProperty().get() / 100;
-
+        //value that user set it
         int width = img.widthImagePropertyProperty().get() * percent;
         int height = img.heightImagePropertyProperty().get() * percent;
 
+        //buffer is original value
         if (width == 0) {
             width = img.bufferedImageProperty().get().getWidth();
         } else if (height == 0) {

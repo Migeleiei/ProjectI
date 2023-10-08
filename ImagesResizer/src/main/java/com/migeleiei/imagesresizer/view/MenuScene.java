@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class MenuScene {
+    //click in sceneControl -> choose water or resize
     SceneController sceneController = new SceneController();
     private final ObjectProperty<ChooseType> chooseTypeObjectProperty;
 

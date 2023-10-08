@@ -47,7 +47,7 @@ public class WaterMarkController {
 
                 } else {
 
-                    String newFileName = "(" + ix + ")" + fileName;
+                    String newFileName = fileName + "(" + ix + ")" ;
 
                     SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, newFileName, this.chooseType);
                     saveImageThread.start();
@@ -80,7 +80,7 @@ public class WaterMarkController {
             listImageModel.forEach(i -> {
                 i.setTextWaterMarkSize(n.intValue());
                 i.setModelProperty(n);
-
+                //active code
             });
         });
     }
