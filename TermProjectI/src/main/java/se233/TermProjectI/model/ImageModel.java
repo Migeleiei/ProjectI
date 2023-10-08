@@ -35,6 +35,9 @@ public class ImageModel {
 
     private final IntegerProperty percentProperty = new SimpleIntegerProperty();
 
+    private final BooleanProperty singleTextProperty = new SimpleBooleanProperty();
+
+
     public ImageModel(String path, String color, int fontSize, String fontFamily, double opacity,
                       BufferedImage bufferedImage, String imageName, boolean keepRatio,
                       int height,
@@ -52,6 +55,7 @@ public class ImageModel {
         this.heightImageProperty.set(height);
         this.widthImageProperty.set(width);
         this.setPercentProperty(100);
+        this.setSingleTextProperty(Constants.IS_SINGLE_TEXT);
 
 
     }
@@ -176,4 +180,13 @@ public class ImageModel {
     }
 
 
+
+
+    public BooleanProperty singleTextPropertyProperty() {
+        return singleTextProperty;
+    }
+
+    public void setSingleTextProperty(boolean singleTextProperty) {
+        this.singleTextProperty.set(singleTextProperty);
+    }
 }

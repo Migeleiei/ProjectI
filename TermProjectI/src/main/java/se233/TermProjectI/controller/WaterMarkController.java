@@ -43,7 +43,7 @@ public class WaterMarkController {
                     SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, fileName, this.chooseType);
                     saveImageThread.start();
                 } else {
-                    String newFileName = fileName + "(" + ix + ")";
+                    String newFileName = "(" + ix + ")" + fileName  ;
 
                     SaveImageThread saveImageThread = new SaveImageThread(i, pathParent, newFileName, this.chooseType);
                     saveImageThread.start();
@@ -51,6 +51,15 @@ public class WaterMarkController {
             }
             System.out.println("Save images are success");
             showSaveImageSuccess();
+        });
+    }
+
+    public void setSingleText(CheckBox keepRatio) {
+        keepRatio.selectedProperty().addListener((ob, o, n) -> {
+            listImageModel.forEach(i -> {
+                i.setSingleTextProperty(n);
+                i.setModelProperty(n);
+            });
         });
     }
 

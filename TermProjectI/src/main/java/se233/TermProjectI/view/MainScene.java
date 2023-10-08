@@ -149,11 +149,15 @@ public class MainScene {
             mainGridImg.getChildren().clear();
             mainGridImg.getRowConstraints().clear();
             mainGridImg.getColumnConstraints().clear();
+
             int inxColumn = 0;
             int inxRow = 0;
 
+
             for (StackPane image : stackPanes) {
+
                 mainGridImg.add(image, inxColumn, inxRow);
+
                 inxColumn++;
                 if (inxColumn >= columnProperty.getValue()) {
                     inxColumn = 0;

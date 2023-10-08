@@ -82,20 +82,83 @@ public class SaveImageThread extends Thread {
 
     public void addTextWatermark(ImageModel img, File destImageFile) {
         try {
-            BufferedImage sourceImage = img.bufferedImageProperty().get();
-            Graphics2D g2d = (Graphics2D) sourceImage.getGraphics();
-            AlphaComposite alphaChannel = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) img.textOpacityProperty().doubleValue());
-            g2d.setComposite(alphaChannel);
-            g2d.setColor(Color.decode(img.textWaterMarkColorProperty().getValue()));
-            g2d.setFont(new Font(img.textWaterMarkFontProperty().getValue(), Font.BOLD, img.getTextWaterMarkSize().intValue()));
-            FontMetrics fontMetrics = g2d.getFontMetrics();
-            Rectangle2D rect = fontMetrics.getStringBounds(img.textWaterMarkProperty().getValue(), g2d);
-            int centerX = (sourceImage.getWidth() - (int) rect.getWidth()) / 2;
-            int centerY = sourceImage.getHeight() / 2;
-            g2d.rotate(Math.toRadians(img.textRotateProperty().doubleValue()), centerX + rect.getWidth() / 2, centerY);
-            g2d.drawString(img.textWaterMarkProperty().getValue(), centerX, centerY);
-            ImageIO.write(sourceImage, "png", destImageFile);
-            g2d.dispose();
+
+
+            if (img.singleTextPropertyProperty().getValue()) {
+                //////
+                BufferedImage sourceImage = img.bufferedImageProperty().get();
+                Graphics2D g2d = (Graphics2D) sourceImage.getGraphics();
+                AlphaComposite alphaChannel = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) img.textOpacityProperty().doubleValue());
+                g2d.setComposite(alphaChannel);
+                g2d.setColor(Color.decode(img.textWaterMarkColorProperty().getValue()));
+                g2d.setFont(new Font(img.textWaterMarkFontProperty().getValue(), Font.BOLD, img.getTextWaterMarkSize().intValue()));
+                FontMetrics fontMetrics = g2d.getFontMetrics();
+                Rectangle2D rect = fontMetrics.getStringBounds(img.textWaterMarkProperty().getValue(), g2d);
+                int centerX = (sourceImage.getWidth() - (int) rect.getWidth()) / 2;
+                int centerY = sourceImage.getHeight() / 2;
+                g2d.rotate(Math.toRadians(img.textRotateProperty().doubleValue()), centerX + rect.getWidth() / 2, centerY);
+                g2d.drawString(img.textWaterMarkProperty().getValue(), centerX, centerY);
+
+                g2d.dispose();
+
+                ImageIO.write(sourceImage, "png", destImageFile);
+            }else{
+
+                BufferedImage sourceImage = img.bufferedImageProperty().get();
+                double width = sourceImage.getWidth();
+                double height = sourceImage.getHeight();
+                int constantStepX = (int) width / 4;
+                int constantStepY = (int) height / 4;
+                int yStart = (int) height / 2;
+                boolean isOddRaw = true;
+                boolean isOddCol = true;
+                boolean isIndent = false;
+
+
+                for (int r = 0; r < 3; r++) {
+                    int xStart = (int) width / 2;
+
+                    if (isIndent) {
+                        xStart += constantStepX / 2;
+                    }
+
+                    for (int c = 0; c < 3; c++) {
+
+                        ///
+                        Graphics2D g2d = (Graphics2D) sourceImage.getGraphics();
+                        // initializes necessary graphic properties
+                        AlphaComposite alphaChannel = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) img.textOpacityProperty().doubleValue());
+                        g2d.setComposite(alphaChannel);
+
+                        g2d.setColor(Color.decode(img.textWaterMarkColorProperty().getValue()));
+                        g2d.setFont(new Font(img.textWaterMarkFontProperty().getValue(), Font.BOLD, img.getTextWaterMarkSize().intValue()));
+                        FontMetrics fontMetrics = g2d.getFontMetrics();
+                        Rectangle2D rect = fontMetrics.getStringBounds(img.textWaterMarkProperty().getValue(), g2d);
+
+                        // calculates the coordinate where the String is painted
+                        int centerX = xStart - (int) rect.getWidth() / 2;
+                        int centerY = yStart ;
+                        g2d.rotate(Math.toRadians(img.textRotateProperty().doubleValue()), centerX + rect.getWidth() / 2, centerY);
+                        g2d.drawString(img.textWaterMarkProperty().getValue(), centerX, centerY);
+                        g2d.dispose();
+                        ////
+
+
+                        xStart += isOddCol ? constantStepX * (c + 1) : -constantStepX * (c + 1);
+                        isOddCol = !isOddCol;
+                    }
+
+                    isIndent = !isIndent;
+                    yStart += isOddRaw ? constantStepY * (r + 1) : -constantStepY * (r + 1);
+                    isOddRaw = !isOddRaw;
+                }
+
+                ImageIO.write(sourceImage, "png", destImageFile);
+
+            }
+
+
+            ///////
         } catch (IOException ex) {
             System.err.println(ex);
         }

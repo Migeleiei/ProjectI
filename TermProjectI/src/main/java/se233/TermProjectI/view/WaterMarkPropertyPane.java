@@ -1,5 +1,7 @@
 package se233.TermProjectI.view;
 
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.HBox;
 import se233.TermProjectI.controller.WaterMarkController;
 import se233.TermProjectI.model.ImageModel;
 import se233.TermProjectI.model.ChooseType;
@@ -70,6 +72,20 @@ public class WaterMarkPropertyPane extends VBox {
         sliderFontSize.setValue(Constants.DEFAULT_TEXT_SIZE);
 
 
+        ColumnConstraints col0 = new ColumnConstraints();
+        col0.setPrefWidth(60);
+        ColumnConstraints col1 = new ColumnConstraints();
+        col0.setPrefWidth(60);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col0.setPrefWidth(60);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col0.setPrefWidth(60);
+
+
+
+        gridPane.getColumnConstraints().addAll(col0,col1,col2,col3);
+
+
         gridPane.add(text, 0, 0);
         gridPane.add(textField, 1, 0);
         gridPane.add(fontSize, 2, 0);
@@ -79,9 +95,13 @@ public class WaterMarkPropertyPane extends VBox {
         ComboBox<String> combo = new ComboBox<>();
 
 
-        for (String f : fontsList) {
+//        for (String f : fontsList) {
+//            combo.getItems().add(f);
+//        }
+
+        fontsList.stream().sorted().forEach(f -> {
             combo.getItems().add(f);
-        }
+        });
 
         ColorPicker colorPicker = new ColorPicker();
 
@@ -110,6 +130,18 @@ public class WaterMarkPropertyPane extends VBox {
         gridPane.add(spinnerOpacity, 3, 2);
 
 
+        // ROW 4
+        CheckBox cSingleText = new CheckBox();
+        cSingleText.setSelected(Constants.IS_KEEP_RATIO);
+        Text singleText = new Text("Single Text");
+        HBox singleBox = new HBox();
+        singleBox.setSpacing(10);
+        singleBox.getChildren().add(singleText);
+        singleBox.getChildren().add(cSingleText);
+
+        gridPane.add(singleBox, 0, 3);
+
+
         /// Listener
 
         watermarkController.addTextListener(textField);
@@ -118,6 +150,7 @@ public class WaterMarkPropertyPane extends VBox {
         watermarkController.addSelectColorListener(colorPicker);
         watermarkController.addTextOpacityListener(spinnerOpacity);
         watermarkController.addSliderRotateListener(slider);
+        watermarkController.setSingleText(cSingleText);
 
         return gridPane;
     }

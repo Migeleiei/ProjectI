@@ -25,6 +25,8 @@ public class Constants {
 
     public static final Boolean IS_KEEP_RATIO = true;
 
+    public static final Boolean IS_SINGLE_TEXT = true;
+
     public static final List<Character> LIST_HIDDEN_FILE = Arrays.asList('.', '_');
 
     public static final int PERCENTAGE_MAX_FOR_RESIZE_IMAGE = 200;
