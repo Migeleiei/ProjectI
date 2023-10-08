@@ -1,4 +1,4 @@
-module com.migeleiei.TermProjectI {
+module se233.TermProjectI {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
